@@ -1,0 +1,17 @@
+name: POC DOCX
+on:
+  pull_request:
+  push:
+    branches: [poc/docx-track-changes]
+permissions:
+  contents: read
+jobs:
+  synthetic-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install -r poc/docx/requirements.txt
+      - run: python -m unittest discover -s tests -v
